@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
+import os
 
 @app.route('/')
 def index():
@@ -22,6 +23,12 @@ def model():
 
     pred = reg.predict(test[['x']])
     return str(pred)
+
+@app.route('/environ')
+def environ():
+    e1 = os.environ['mypass']
+    return e1
+
 
 if __name__ ==  '__main__':
     app.run(host='0.0.0.0', port=8080)
